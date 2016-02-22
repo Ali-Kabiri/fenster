@@ -60,6 +60,7 @@ public final class MediaFensterPlayerController extends RelativeLayout implement
     private static final int FADE_OUT = 1;
     private static final int SHOW_PROGRESS = 2;
     private FensterPlayerControllerVisibilityListener visibilityListener;
+    private FensterPlayerControllerNavigationListener navigationListener;
     private FensterPlayer mFensterPlayer;
     private boolean mShowing;
     private boolean mDragging;
@@ -182,6 +183,10 @@ public final class MediaFensterPlayerController extends RelativeLayout implement
 
     public void setVisibilityListener(final FensterPlayerControllerVisibilityListener visibilityListener) {
         this.visibilityListener = visibilityListener;
+    }
+
+    public void setNavigationListener(final FensterPlayerControllerNavigationListener navigationListener) {
+        this.navigationListener = navigationListener;
     }
 
     private void initControllerView() {

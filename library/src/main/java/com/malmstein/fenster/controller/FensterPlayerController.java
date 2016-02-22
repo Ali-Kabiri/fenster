@@ -16,4 +16,6 @@ public interface FensterPlayerController {
 
     void setVisibilityListener(FensterPlayerControllerVisibilityListener visibilityListener);
 
+    void setNavigationListener(FensterPlayerControllerNavigationListener navigationListener);
+
 }

@@ -44,6 +44,7 @@ public final class SimpleMediaFensterPlayerController extends FrameLayout implem
     private static final int SHOW_PROGRESS = 2;
 
     private FensterPlayerControllerVisibilityListener visibilityListener;
+    private FensterPlayerControllerNavigationListener navigationListener;
     private FensterPlayer mFensterPlayer;
     private boolean mShowing;
     private boolean mDragging;
@@ -94,13 +95,21 @@ public final class SimpleMediaFensterPlayerController extends FrameLayout implem
         this.visibilityListener = visibilityListener;
     }
 
+    @Override
+    public void setNavigationListener(final FensterPlayerControllerNavigationListener navigationListener) {
+        this.navigationListener = navigationListener;
+    }
+
     private void initControllerView() {
         mPauseButton = (ImageButton) findViewById(R.id.fen__media_controller_pause);
         mPauseButton.requestFocus();
         mPauseButton.setOnClickListener(mPauseListener);
 
         mNextButton = (ImageButton) findViewById(R.id.fen__media_controller_next);
+        mNextButton.setOnClickListener(mNextListener);
+
         mPrevButton = (ImageButton) findViewById(R.id.fen__media_controller_previous);
+        mPrevButton.setOnClickListener(mPrevListener);
 
         mProgress = (SeekBar) findViewById(R.id.fen__media_controller_progress);
         SeekBar seeker = (SeekBar) mProgress;
@@ -470,6 +479,25 @@ public final class SimpleMediaFensterPlayerController extends FrameLayout implem
         public void onClick(final View v) {
             doPauseResume();
             show(DEFAULT_TIMEOUT);
+        }
+    };
+
+    private final OnClickListener mNextListener = new OnClickListener() {
+        public void onClick(final View v) {
+            //doPauseResume();
+            show(DEFAULT_TIMEOUT);
+            navigationListener.onControlsNavigationClick(FensterPlayerControllerNavigationListener.NEXT);
+            Log.i(TAG, "next button received");
+
+        }
+    };
+
+    private final OnClickListener mPrevListener = new OnClickListener() {
+        public void onClick(final View v) {
+            //doPauseResume();
+            show(DEFAULT_TIMEOUT);
+            navigationListener.onControlsNavigationClick(FensterPlayerControllerNavigationListener.PREV);
+            Log.i(TAG, "prev button received");
         }
     };
 
